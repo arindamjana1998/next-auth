@@ -5,8 +5,6 @@ import { createPortal } from "react-dom";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { HiHome, HiDocumentText, HiMenu, HiX } from "react-icons/hi";
-import { Combobox } from "@/components/ui/combobox";
-import { useLocationFilter } from "@/hooks/useLocationFilter";
 import { useWindowScroll } from "@/hooks/useWindowScroll";
 import UserDropDown from "./UserDropDown";
 
@@ -67,7 +65,6 @@ const MobileMenu = ({
 
 const SiteHeader = () => {
   const pathname = usePathname();
-  const { selectedLocation, setSelectedLocation } = useLocationFilter("all");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const scrollY = useWindowScroll(); // Assuming custom hook returns number
@@ -124,16 +121,6 @@ const SiteHeader = () => {
           </div>
         </div>
       </div>
-
-      {mounted && (
-        <MobileMenu
-          isOpen={isMobileMenuOpen}
-          onClose={toggleMobileMenu}
-          selectedLocation={selectedLocation}
-          setSelectedLocation={setSelectedLocation}
-          showLocationFilter={showLocationFilter}
-        />
-      )}
     </header>
   );
 };
