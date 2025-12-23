@@ -1,8 +1,9 @@
 "use client";
-import { signIn, getSession } from "next-auth/react";
+// import { signIn, getSession } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import { auth, signIn } from "@/auth";
 const SignInForm = () => {
   const router = useRouter();
   const [username, setUsername] = useState("");
@@ -22,7 +23,7 @@ const SignInForm = () => {
       if (result?.error) {
         toast.error(result.error);
       } else {
-        const session = await getSession();
+        const session = await auth();
         const roles = session?.user?.roles || [];
 
         if (roles.includes("ROLE_ADMIN")) {

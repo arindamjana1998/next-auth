@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useSession, signOut } from "next-auth/react";
 import { FaRegUser } from "react-icons/fa";
 
 import {
@@ -11,11 +10,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useRouter } from "next/navigation";
+import { auth, signOut } from "@/auth";
 
-const UserDropDown = () => {
+const UserDropDown = async () => {
   const router = useRouter();
-  const { data: session } = useSession();
+  const session = await auth();
   const user = session?.user;
+  if (!user) return null;
 
   const firstChar = user?.name?.charAt(0).toUpperCase();
   const roles = user?.roles || [];
@@ -60,7 +61,7 @@ const UserDropDown = () => {
         )}
         <DropdownMenuItem
           className="cursor-pointer text-red-600 focus:text-red-600"
-          onClick={() => signOut({ callbackUrl: "/signin" })}
+          onClick={() => signOut()}
         >
           Logout
         </DropdownMenuItem>
