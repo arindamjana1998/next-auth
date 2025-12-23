@@ -10,17 +10,6 @@ import { useLocationFilter } from "@/hooks/useLocationFilter";
 import { useWindowScroll } from "@/hooks/useWindowScroll";
 import UserDropDown from "./UserDropDown";
 
-const locations = [
-  { label: "All Locations", value: "all" },
-  { label: "Bankura", value: "bankura" },
-  { label: "Midnapore", value: "midnapore" },
-  { label: "Jhargram", value: "jhargram" },
-  { label: "Burdwan", value: "burdwan" },
-  { label: "Kolkata", value: "kolkata" },
-  { label: "Howrah", value: "howrah" },
-  { label: "Hooghly", value: "hooghly" },
-];
-
 const HIDDEN_LOCATION_ROUTES = ["/contact-us", "/signin"];
 
 const MobileMenu = ({
@@ -68,24 +57,6 @@ const MobileMenu = ({
                 <span className="font-medium">Contact Us</span>
               </Link>
             </div>
-            {showLocationFilter && (
-              <div className="mt-6 pt-6 border-t border-gray-200">
-                <label className="block mb-2 text-sm font-medium text-gray-700">
-                  Location
-                </label>
-                <Combobox
-                  options={locations}
-                  value={selectedLocation}
-                  onValueChange={setSelectedLocation}
-                  placeholder="Select location..."
-                  searchPlaceholder="Search location..."
-                  emptyMessage="No location found."
-                  showSearch={true}
-                  buttonClassName="w-full justify-between text-gray-700 border-gray-300 hover:bg-gray-100"
-                  popoverClassName="w-full !z-[80]"
-                />
-              </div>
-            )}
           </nav>
         </div>
       </div>
@@ -138,24 +109,6 @@ const SiteHeader = () => {
 
           <div className="flex items-center gap-3">
             <UserDropDown />
-
-            {showLocationFilter && (
-              <div className="hidden sm:block">
-                {mounted && (
-                  <Combobox
-                    options={locations}
-                    value={selectedLocation}
-                    onValueChange={setSelectedLocation}
-                    placeholder="Select location..."
-                    searchPlaceholder="Search location..."
-                    emptyMessage="No location found."
-                    showSearch={true}
-                    buttonClassName="!text-white !border-white/20 !bg-transparent hover:!bg-[var(--navy-dark)] w-auto min-w-[160px] justify-between text-sm sm:text-base"
-                    popoverClassName="w-[160px]"
-                  />
-                )}
-              </div>
-            )}
 
             <button
               onClick={toggleMobileMenu}
